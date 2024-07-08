@@ -3,7 +3,7 @@ local M = {}
 local config = {
   silent = true,
   autocmd = true,
-  project_dir = '~/.config/nvim/projects/',
+  project_dir = vim.fn.stdpath("config") .. '/projects/',
   project_config = {},
 }
 
@@ -97,7 +97,7 @@ end
 ---get any config file with extension
 ---@return string|nil
 function M.get_config_by_ext(ext)
-  local rootFolder = string.match(vim.loop.cwd(), '[^%/]+$')
+  local rootFolder = vim.fn.fnamemodify(vim.loop.cwd(), ':p:h:t')
   return config.project_dir .. rootFolder .. '.' .. ext
 end
 
